@@ -1,63 +1,61 @@
 import Link from 'next/link';
 import { devotionals } from '@/lib/data';
+import { ArrowRight } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-neutral-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <header className="mb-16 text-center">
-          <h1 className="text-4xl font-extrabold text-neutral-900 tracking-tight sm:text-5xl">
-            Daily Devotionals
-          </h1>
-          <p className="mt-4 text-xl text-neutral-600">
-            Moments of reflection, peace, and growth.
-          </p>
-        </header>
+    <div className="space-y-16">
+      <header className="max-w-2xl">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.1] mb-6">
+          Moments of reflection, <br className="hidden sm:block" /> peace, and growth.
+        </h1>
+        <p className="text-lg sm:text-xl text-[#57534E] dark:text-[#A8A29E] leading-relaxed font-sans font-light">
+          A curated collection of thoughts and meditations designed to ground you in truth and encourage your spirit.
+        </p>
+      </header>
 
-        <main>
-          <div className="space-y-8">
-            {devotionals.map((devotional) => (
-              <article 
-                key={devotional.id} 
-                className="bg-white p-6 rounded-2xl shadow-sm border border-neutral-100 hover:shadow-md transition-shadow duration-200"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
-                    {devotional.topic}
-                  </span>
-                  <time dateTime={devotional.date} className="text-sm text-neutral-500">
-                    {new Date(devotional.date).toLocaleDateString('en-US', {
-                      month: 'long',
-                      day: 'numeric',
-                      year: 'numeric'
-                    })}
-                  </time>
+      <section>
+        <h2 className="text-sm font-sans font-semibold uppercase tracking-widest text-[#9A3412] dark:text-[#FDBA74] mb-8">
+          Latest Entries
+        </h2>
+        
+        <div className="divide-y divide-[#E5E2DA] dark:divide-[#2E2C29] border-t border-[#E5E2DA] dark:border-[#2E2C29]">
+          {devotionals.map((devotional) => (
+            <article 
+              key={devotional.id} 
+              className="py-10 group"
+            >
+              <Link href={`/article/${devotional.slug}`} className="block">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-4 mb-4">
+                  <h3 className="text-2xl sm:text-3xl font-medium group-hover:text-[#9A3412] dark:group-hover:text-[#FDBA74] transition-colors">
+                    {devotional.title}
+                  </h3>
+                  <div className="flex items-center gap-4 text-sm font-sans text-[#78716C] dark:text-[#A8A29E] shrink-0">
+                    <span>{devotional.topic}</span>
+                    <span className="w-1 h-1 rounded-full bg-current opacity-50"></span>
+                    <time dateTime={devotional.date}>
+                      {new Date(devotional.date).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                      })}
+                    </time>
+                  </div>
                 </div>
                 
-                <h2 className="text-2xl font-bold text-neutral-900 mb-2">
-                  <Link href={`/article/${devotional.slug}`} className="hover:text-blue-600 transition-colors">
-                    {devotional.title}
-                  </Link>
-                </h2>
-                
-                <p className="text-neutral-600 mb-4 line-clamp-2">
+                <p className="text-lg text-[#57534E] dark:text-[#D6D3D1] leading-relaxed mb-6 max-w-2xl font-serif">
                   {devotional.excerpt}
                 </p>
                 
-                <Link 
-                  href={`/article/${devotional.slug}`} 
-                  className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800"
-                >
-                  Read full devotional
-                  <svg className="ml-1.5 h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
-                  </svg>
-                </Link>
-              </article>
-            ))}
-          </div>
-        </main>
-      </div>
+                <div className="inline-flex items-center text-sm font-sans font-medium text-[#9A3412] dark:text-[#FDBA74] group-hover:opacity-80 transition-opacity">
+                  Read reflection
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
