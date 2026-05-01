@@ -34,7 +34,7 @@ export default function RootLayout({
       className={`${lora.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
-       <script defer src="https://cloud.umami.is/script.js" data-website-id="1eed8138-978d-460c-a0e2-7337e89baf8a"></script>
+       <script defer src="https://cloud.umami.is/script.js" data-website-id="a6eb135b-cf5b-4a49-b76a-1eea8873f75d"></script>
       </head>
       <body className="min-h-full flex flex-col font-serif bg-[#FDFBF7] dark:bg-[#1C1917] text-[#2C2A25] dark:text-[#E6E4DD] selection:bg-[#9A3412]/20 dark:selection:bg-[#FDBA74]/20">
         <ThemeProvider
